@@ -1,0 +1,11 @@
+{
+  "name": "claude-mbti",
+  "owner": { "name": "JeongUk Park" },
+  "plugins": [
+    {
+      "name": "claude-mbti",
+      "source": "./",
+      "description": "Claude Code 세션에 16가지 MBTI 성격을 주입하는 플러그인"
+    }
+  ]
+}
