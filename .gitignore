@@ -1,0 +1,18 @@
+# 공개 배포용 저장소 — 기본적으로 전부 무시하고 플러그인 파일만 선택적으로 허용한다.
+# 개인정보 · 개인 세션 대화 · 작업 맥락 · 브레인스토밍 스펙 · 세션 히스토리 유출 방지.
+/*
+
+# --- 플러그인 구성요소만 허용 ---
+!/.gitignore
+!/.claude-plugin/
+!/commands/
+!/hooks/
+!/scripts/
+!/profiles/
+!/README.md
+!/LICENSE
+
+# --- 허용된 디렉토리 내부의 OS/노이즈 파일은 다시 무시 ---
+**/.DS_Store
+**/*.log
+**/node_modules/
