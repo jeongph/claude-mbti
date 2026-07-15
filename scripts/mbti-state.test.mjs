@@ -76,3 +76,31 @@ test('cmd 잘못된 유형 → 오류 안내(상태 불변)', () => {
   assert.match(out, /알 수 없|유효하지|목록/)
   assert.equal(getState(), null)
 })
+test('cmd set (유형 없이) → 크래시 없이 오류 안내', () => {
+  let out
+  assert.doesNotThrow(() => { out = cmd(['set']) })
+  assert.match(out, /알 수 없|유효하지|목록/)
+  assert.equal(getState(), null)
+})
+
+import { execFileSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
+const CLI = path.join(path.dirname(fileURLToPath(import.meta.url)), 'mbti-state.mjs')
+function runCli(arg) {
+  return execFileSync('node', [CLI, 'cmd', arg], {
+    env: { ...process.env, CLAUDE_CONFIG_DIR: tmp }, encoding: 'utf8',
+  })
+}
+
+test('CLI: 공백 포함 단일 인자 "set intj" 를 재분리해 활성화', () => {
+  // 커맨드가 "$ARGUMENTS" 를 따옴표로 넘겨도 정상 파싱되어야 한다
+  const out = runCli('set intj')
+  assert.match(out, /INTJ|전략가/)
+  assert.equal(getState().type, 'intj')
+})
+test('CLI: 셸 메타문자 포함 입력은 유형으로만 취급(인젝션 무력화)', () => {
+  const out = runCli('intj; echo PWNED')
+  assert.doesNotMatch(out, /PWNED/)          // 부작용 없음
+  assert.match(out, /알 수 없|유효하지|목록/) // 유효하지 않은 유형으로 안내
+  assert.equal(getState(), null)             // 상태 불변
+})

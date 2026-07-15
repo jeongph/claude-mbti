@@ -68,7 +68,7 @@ export function cmd(args) {
     const s = setState(randomType())
     return `🎲 무작위 배정: ${s.type.toUpperCase()} (${nameOf(s.type)}) 활성화.`
   }
-  const code = (verb === 'set' ? rest[0] : head || '').toLowerCase()
+  const code = (verb === 'set' ? (rest[0] || '') : head).toLowerCase()
   if (!isValidType(code)) {
     return `알 수 없는 유형: "${code || head}". \`/mbti list\` 로 16개 목록을 확인할 수 있다.`
   }
@@ -79,5 +79,7 @@ export function cmd(args) {
 // CLI 진입점: `node mbti-state.mjs cmd <args...>`
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   const [sub, ...rest] = process.argv.slice(2)
-  if (sub === 'cmd') process.stdout.write(cmd(rest) + '\n')
+  // 커맨드에서 "$ARGUMENTS" 를 따옴표로 넘겨 셸 메타문자를 차단하므로 공백으로 재분리한다.
+  // (따옴표 유무 모두 호환: ["set intj"] 도 ["set","intj"] 도 동일하게 처리)
+  if (sub === 'cmd') process.stdout.write(cmd(rest.join(' ').split(/\s+/).filter(Boolean)) + '\n')
 }
