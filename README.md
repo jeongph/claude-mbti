@@ -5,8 +5,8 @@ Claude Code 세션에 16가지 MBTI 성격(말투 + 행동 성향)을 주입하�
 말투와 성향을 따르며, 정답의 정확성·안전·프로젝트 컨벤션은 성격과 무관하게 유지된다.
 
 ## 설치
-1. 이 저장소를 마켓플레이스로 추가: `/plugin marketplace add jeongph/claude-mbti`
-2. 플러그인 설치: `/plugin install claude-mbti`
+1. [jeongph/claude-plugins 마켓플레이스](https://github.com/jeongph/claude-plugins) 등록(최초 1회): `/plugin marketplace add jeongph/claude-plugins`
+2. 플러그인 설치: `/plugin install claude-mbti@jeongph-claude-plugins`
 
 ## 사용법
 - `/mbti intj` — 해당 유형으로 성격 켜기

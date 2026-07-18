@@ -1,6 +1,9 @@
 {
   "name": "claude-mbti",
-  "owner": { "name": "JeongUk Park" },
+  "owner": {
+    "name": "JeongUk Park"
+  },
+  "description": "claude-mbti 배포용 마켓플레이스",
   "plugins": [
     {
       "name": "claude-mbti",
