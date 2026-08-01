@@ -1,6 +1,6 @@
 {
   "name": "claude-mbti",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Claude Code 세션에 16가지 MBTI 성격(말투+행동 성향)을 주입하는 플러그인",
   "author": { "name": "JeongUk Park" },
   "license": "MIT",
