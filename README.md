@@ -1,5 +1,8 @@
 # claude-mbti
 
+[![version](https://img.shields.io/github/v/release/jeongph/claude-mbti?label=version&color=blue)](https://github.com/jeongph/claude-mbti/releases)
+[![license](https://img.shields.io/github/license/jeongph/claude-mbti?color=lightgrey)](LICENSE)
+
 Claude Code 세션에 16가지 MBTI 성격(말투 + 행동 성향)을 주입하는 플러그인.
 `/mbti intj` 로 켜고, `/mbti off` 로 끈다. 켜져 있는 동안 모든 응답이 해당 유형의
 말투와 성향을 따르며, 정답의 정확성·안전·프로젝트 컨벤션은 성격과 무관하게 유지된다.
