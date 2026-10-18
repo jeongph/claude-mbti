@@ -23,7 +23,7 @@ test('비활성 상태 → 빈 출력, exit 0', () => {
   assert.equal(run(tmp).trim(), '')
 })
 
-test('활성 상태 → additionalContext 에 프로파일+경계 포함', () => {
+test('활성 상태 → additionalContext에 프로파일과 경계 포함', () => {
   execFileSync('node', [state, 'cmd', 'intj'], { env: { ...process.env, CLAUDE_CONFIG_DIR: tmp } })
   const out = JSON.parse(run(tmp))
   assert.equal(out.hookSpecificOutput.hookEventName, 'UserPromptSubmit')

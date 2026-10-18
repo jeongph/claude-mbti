@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { CODES, TYPES } from './mbti-types.mjs'
 
 export function pluginRoot() {
-  // scripts/ 의 상위가 플러그인 루트
+  // scripts/의 상위가 플러그인 루트
   return path.dirname(path.dirname(fileURLToPath(import.meta.url)))
 }
 export function profilesDir() {
@@ -26,7 +26,7 @@ export function getState() {
     const s = JSON.parse(raw)
     return isValidType(s.type) ? s : null
   } catch {
-    return null // 없음/손상 → off 로 간주 (fail-open)
+    return null // 없거나 손상되면 off로 간주 (fail-open)
   }
 }
 export function setState(code) {
@@ -40,7 +40,7 @@ export function clearState() {
   if (existsSync(stateFile())) rmSync(stateFile())
 }
 export function randomType() {
-  // 결정적 랜덤 회피 불필요 — 일반 스크립트이므로 Math.random 허용
+  // 결정적 랜덤 회피 불필요: 일반 스크립트이므로 Math.random 허용
   return CODES[Math.floor(Math.random() * CODES.length)]
 }
 export function buildInjection(code) {
@@ -58,9 +58,9 @@ export function cmd(args) {
   if (!head) {
     const s = getState()
     return s ? `🎭 현재 성격: ${s.type.toUpperCase()} (${nameOf(s.type)})`
-             : '성격이 꺼져 있다. `/mbti <유형>` 으로 켤 수 있다. 목록은 `/mbti list`.'
+             : '성격이 꺼져 있다. `/mbti <유형>`으로 켤 수 있다. 목록은 `/mbti list`.'
   }
-  if (verb === 'off') { clearState(); return '🎭 성격을 해제했다. 평소 Claude 로 돌아간다.' }
+  if (verb === 'off') { clearState(); return '🎭 성격을 해제했다. 평소 Claude로 돌아간다.' }
   if (verb === 'list') {
     return ['사용 가능한 16개 유형:', ...TYPES.map(t => `- ${t.code.toUpperCase()} — ${t.name}`)].join('\n')
   }
@@ -70,7 +70,7 @@ export function cmd(args) {
   }
   const code = (verb === 'set' ? (rest[0] || '') : head).toLowerCase()
   if (!isValidType(code)) {
-    return `알 수 없는 유형: "${code || head}". \`/mbti list\` 로 16개 목록을 확인할 수 있다.`
+    return `알 수 없는 유형: "${code || head}". \`/mbti list\`로 16개 목록을 확인할 수 있다.`
   }
   const s = setState(code)
   return `🎭 ${s.type.toUpperCase()} (${nameOf(s.type)}) 성격을 활성화했다. 해제는 \`/mbti off\`.`
@@ -79,7 +79,7 @@ export function cmd(args) {
 // CLI 진입점: `node mbti-state.mjs cmd <args...>`
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   const [sub, ...rest] = process.argv.slice(2)
-  // 커맨드에서 "$ARGUMENTS" 를 따옴표로 넘겨 셸 메타문자를 차단하므로 공백으로 재분리한다.
-  // (따옴표 유무 모두 호환: ["set intj"] 도 ["set","intj"] 도 동일하게 처리)
+  // 커맨드에서 "$ARGUMENTS"를 따옴표로 넘겨 셸 메타문자를 차단하므로 공백으로 재분리한다.
+  // (따옴표 유무 모두 호환: ["set intj"]도 ["set","intj"]도 동일하게 처리)
   if (sub === 'cmd') process.stdout.write(cmd(rest.join(' ').split(/\s+/).filter(Boolean)) + '\n')
 }

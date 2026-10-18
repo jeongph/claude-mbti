@@ -15,10 +15,10 @@ for (const code of CODES) {
     assert.ok(existsSync(p), `${code}.md 없음`)
     const body = readFileSync(p, 'utf8')
     for (const h of ['말투', '설명', '상호작용', '하지 않는']) {
-      assert.match(body, new RegExp(h), `${code}.md 에 "${h}" 섹션 없음`)
+      assert.match(body, new RegExp(h), `${code}.md에 "${h}" 섹션 없음`)
     }
   })
-  test(`buildInjection(${code}) 은 경계+프로파일 결합`, () => {
+  test(`buildInjection(${code})은 경계와 프로파일 결합`, () => {
     const combined = buildInjection(code)
     assert.match(combined, /정확성/)      // 경계
     assert.match(combined, /## 말투/)     // 프로파일

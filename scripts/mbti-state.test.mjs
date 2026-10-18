@@ -11,14 +11,14 @@ beforeEach(() => {
   process.env.CLAUDE_CONFIG_DIR = tmp
 })
 
-test('isValidType 은 16개 유형만 허용', () => {
+test('isValidType은 16개 유형만 허용', () => {
   assert.equal(isValidType('intj'), true)
   assert.equal(isValidType('INTJ'), true) // 대소문자 무관
   assert.equal(isValidType('xxxx'), false)
   assert.equal(isValidType(''), false)
 })
 
-test('getState 는 상태 없으면 null', () => {
+test('getState는 상태가 없으면 null', () => {
   assert.equal(getState(), null)
 })
 
@@ -29,17 +29,17 @@ test('setState → getState 라운드트립', () => {
   assert.ok(existsSync(stateFile()))
 })
 
-test('setState 는 잘못된 유형에 throw', () => {
+test('setState는 잘못된 유형에 throw', () => {
   assert.throws(() => setState('nope'))
 })
 
-test('clearState 후 getState 는 null', () => {
+test('clearState 후 getState는 null', () => {
   setState('intj')
   clearState()
   assert.equal(getState(), null)
 })
 
-test('randomType 은 유효한 코드 반환', () => {
+test('randomType은 유효한 코드 반환', () => {
   assert.equal(isValidType(randomType()), true)
 })
 
@@ -92,8 +92,8 @@ function runCli(arg) {
   })
 }
 
-test('CLI: 공백 포함 단일 인자 "set intj" 를 재분리해 활성화', () => {
-  // 커맨드가 "$ARGUMENTS" 를 따옴표로 넘겨도 정상 파싱되어야 한다
+test('CLI: 공백 포함 단일 인자 "set intj"를 재분리해 활성화', () => {
+  // 커맨드가 "$ARGUMENTS"를 따옴표로 넘겨도 정상 파싱되어야 한다
   const out = runCli('set intj')
   assert.match(out, /INTJ|전략가/)
   assert.equal(getState().type, 'intj')

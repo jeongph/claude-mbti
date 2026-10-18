@@ -1,5 +1,5 @@
 ---
-description: MBTI 성격을 켜고 끄고 전환한다 (말투+행동 성향)
+description: MBTI 성격을 켜고 끄고 전환한다 (말투와 행동 성향)
 argument-hint: "[유형 | off | list | random]"
 allowed-tools: Bash(node:*)
 ---
