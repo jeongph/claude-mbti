@@ -1,4 +1,4 @@
-// 16개 MBTI 유형 단일 출처. code 는 소문자, name 은 한글 별칭.
+// 16개 MBTI 유형은 여기에서만 정의한다. code는 소문자, name은 한글 별칭.
 export const TYPES = [
   { code: 'intj', name: '전략가' }, { code: 'intp', name: '논리술사' },
   { code: 'entj', name: '통솔자' }, { code: 'entp', name: '변론가' },
